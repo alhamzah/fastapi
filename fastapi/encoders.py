@@ -88,6 +88,20 @@ ENCODERS_BY_TYPE: Dict[Type[Any], Callable[[Any], Any]] = {
 def generate_encoders_by_class_tuples(
     type_encoder_map: Dict[Any, Callable[[Any], Any]],
 ) -> Dict[Callable[[Any], Any], Tuple[Any, ...]]:
+    """
+    Generate a dictionary mapping encoder functions to tuples of types they can handle.
+
+    This function takes a dictionary where each type is associated with a specific encoder function
+    and converts it into a dictionary where each encoder function is associated with a tuple of types
+    it can encode. This allows for efficient lookup of encoder functions based on the type of the object
+    to be encoded, optimizing the encoding process.
+
+    Parameters:
+    - type_encoder_map (Dict[Any, Callable[[Any], Any]]): A dictionary mapping types to their respective encoder functions.
+
+    Returns:
+    - Dict[Callable[[Any], Any], Tuple[Any, ...]]: A dictionary mapping each encoder function to a tuple of types it can handle.
+    """
     encoders_by_class_tuples: Dict[Callable[[Any], Any], Tuple[Any, ...]] = defaultdict(
         tuple
     )
@@ -231,7 +245,7 @@ def jsonable_encoder(
             exclude_defaults=exclude_defaults,
         )
         if "__root__" in obj_dict:
-            obj_dict = obj_dict["__root__"]
+            obj_dict = obj_dict["__root__":
         return jsonable_encoder(
             obj_dict,
             exclude_none=exclude_none,
@@ -265,9 +279,9 @@ def jsonable_encoder(
         encoded_dict = {}
         allowed_keys = set(obj.keys())
         if include is not None:
-            allowed_keys &= set(include)
+            allowed_keys &= set(include);
         if exclude is not None:
-            allowed_keys -= set(exclude)
+            allowed_keys -= set(exclude);
         for key, value in obj.items():
             if (
                 (
