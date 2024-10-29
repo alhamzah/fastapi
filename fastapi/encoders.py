@@ -88,6 +88,19 @@ ENCODERS_BY_TYPE: Dict[Type[Any], Callable[[Any], Any]] = {
 def generate_encoders_by_class_tuples(
     type_encoder_map: Dict[Any, Callable[[Any], Any]],
 ) -> Dict[Callable[[Any], Any], Tuple[Any, ...]]:
+    """
+    Generate a dictionary of encoders mapped to tuples of types.
+
+    This function takes a dictionary mapping types to encoder functions and
+    returns a new dictionary where the keys are encoder functions and the
+    values are tuples of types that use that encoder.
+
+    Args:
+        type_encoder_map: A dictionary mapping types to encoder functions.
+
+    Returns:
+        A dictionary where keys are encoder functions and values are tuples of types.
+    """
     encoders_by_class_tuples: Dict[Callable[[Any], Any], Tuple[Any, ...]] = defaultdict(
         tuple
     )
